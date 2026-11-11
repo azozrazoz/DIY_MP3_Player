@@ -47,13 +47,3 @@
 | `Core/Src/FatFs/`       | FatFs R0.16 (только чтение, длинные имена UTF-8, exFAT) |
 | `Core/Src/minimp3/`     | MP3-декодер minimp3 (CC0), всегда собирается с -O2 |
 
-## Важно про CubeMX (.ioc)
-
-Камера (DCMI, I2C1, TIM16, MCO) из этого проекта убрана.
-**I2S2 в CubeMX не настроен** — он настроен в коде (`audio_out.c`), чтобы
-«Generate Code» его не ломал. Если всё же перегенерируешь код:
-
-1. В `Core/Inc/stm32h7xx_hal_conf.h` снова включи `#define HAL_I2S_MODULE_ENABLED`
-   (иначе сборка остановится с понятной ошибкой `#error`).
-2. Не назначай в CubeMX пины PB12, PB13, PB15 на другие функции.
-3. У `MX_SDMMC1_SD_Init` должна остаться галочка «Do Not Generate Function Call».
